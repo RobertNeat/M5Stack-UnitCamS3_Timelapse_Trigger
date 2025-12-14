@@ -1,0 +1,38 @@
+On the start site should be:
+
+
+# Core elements:
+--> stream (live stream from camera)
+        - with preview
+
+--> capture image
+        - with gallery
+save the single image to the sd card
+
+
+
+
+# Controls
+--> turn on timelapse trigger (on/off)
+the camera will take photos on external button trigger when the state is on
+
+--> led shutter trigger (on/off)
+
+--> enable start-sequence detection (on/off)
+camera will detect the start sequence based on the button press frequency
+
+
+--> enable end-sequence detection (on/off)
+camera will detect the start sequence based on the button press frequency
+
+--> manual timelapse setup 
+        - each ... seconds take image
+        - start at .. end at ...
+
+--> exposure (auto/manual)
+set the exposure so the images wont flicker between the takes or make it automatic if the print is long 
+
+-------------------------------------
+
+additionally:
+- make the directory for each timelapse series
