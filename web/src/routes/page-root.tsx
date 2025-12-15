@@ -4,7 +4,6 @@ import CardCameraTest from "../components/hardware-test/card-camera-test";
 import CardSdCardTest from "../components/hardware-test/card-sd-card-test";
 import CardMicTest from "../components/hardware-test/card-mic-test";
 import CardLedTest from "../components/hardware-test/card-led-test";
-import CardPoster from "../components/poster/card-poster";
 import CardShooter from "../components/shooter/card-shooter";
 
 function PageRoot() {
@@ -27,10 +26,6 @@ function PageRoot() {
           <Divider></Divider>
 
           <CardLedTest></CardLedTest>
-        </Card>
-
-        <Card className="grow">
-          <CardPoster></CardPoster>
         </Card>
 
         <Card className="grow">

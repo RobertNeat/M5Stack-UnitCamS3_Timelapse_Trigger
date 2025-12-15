@@ -1,0 +1,108 @@
+/* Theme Variables and Base Styling */
+
+/* Default theme (light) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-accent: #0f172a;
+  --border-color: #e2e8f0;
+  --icon-color: #374151;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+/* System dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #282828;
+    --bg-secondary: #3C3C3C;
+    --bg-tertiary: #4A4A4A;
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-accent: #ffffff;
+    --border-color: #525252;
+    --icon-color: #e5e7eb;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  }
+}
+
+/* Light theme class override */
+.theme-light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-accent: #0f172a;
+  --border-color: #e2e8f0;
+  --icon-color: #374151;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Dark theme class override */
+.theme-dark {
+  --bg-primary: #282828;
+  --bg-secondary: #3C3C3C;
+  --bg-tertiary: #4A4A4A;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-accent: #ffffff;
+  --border-color: #525252;
+  --icon-color: #e5e7eb;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+}
+
+/* Apply theme to body and base elements */
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global text styling */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-accent) !important;
+}
+
+p {
+  color: var(--text-primary) !important;
+}
+
+/* Utility classes for theme-aware styling */
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--text-accent);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+.icon-theme {
+  color: var(--icon-color);
+}
+
+.shadow-theme {
+  box-shadow: var(--shadow);
+}

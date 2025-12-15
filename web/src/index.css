@@ -1,3 +1,65 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* Import theme variables */
+@import './styles/theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Nunito' !important;
+  }
+  
+  /* Main page background */
+  #root {
+    background-color: var(--bg-primary) !important;
+    min-height: 100vh;
+  }
+  
+  /* Force NextUI cards/panes to use theme colors */
+  .nextui-card, 
+  [data-slot="base"], 
+  .nextui-card-body,
+  [data-slot="body"],
+  div[class*="bg-white"],
+  div[class*="bg-content1"] {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+  }
+  
+  /* Force all text in cards to respect theme */
+  .nextui-card *, 
+  [data-slot="base"] *,
+  .nextui-card-body *,
+  [data-slot="body"] * {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Headers in cards */
+  .nextui-card h1, .nextui-card h2, .nextui-card h3, .nextui-card h4, .nextui-card h5, .nextui-card h6,
+  [data-slot="base"] h1, [data-slot="base"] h2, [data-slot="base"] h3, [data-slot="base"] h4, [data-slot="base"] h5, [data-slot="base"] h6 {
+    color: var(--text-accent) !important;
+  }
+  
+  /* Button styling */
+  .nextui-button {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Dividers */
+  .nextui-divider, [data-slot="separator"] {
+    background-color: var(--border-color) !important;
+  }
+  
+  /* Input fields */
+  .nextui-input, .nextui-select, .nextui-textarea {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+  }
+}

@@ -1,18 +1,48 @@
 // "use client";
 
-// import { Link } from "@nextui-org/react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Button } from "@nextui-org/react";
+import '../styles/title-bar.css';
 
 export default function TitleBar() {
-//   const docLink: string = "https://www.github.com";
-//   const githubLink: string = "https://www.github.com";
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
   return (
-    <div className="fixed w-full h-16 z-50 bg-white/50 backdrop-blur-lg flex shadow">
+    <div className="title-bar fixed w-full h-16 z-50 flex">
       <div className="w-full ml-5 mt-1.5 flex flex-col">
-        <p className="font-bold font-serif text-xl">UNIT-CAM-S3</p>
+        <div className="flex items-center">
+          {!isHomePage && (
+            <Button
+              isIconOnly
+              variant="light"
+              size="sm"
+              onClick={handleBackClick}
+              className="back-button mr-3"
+              aria-label="Go back"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+            </Button>
+          )}
+          <p className="title-text text-xl">Unit_Cam_S3 Timelapse trigger</p>
+        </div>
 
         <div className="flex ml-px mr-5">
-          <p className="font-serif font-light">User Demo</p>
+          <p className="subtitle-text">User Demo</p>
 
           <div className="grow"></div>
 

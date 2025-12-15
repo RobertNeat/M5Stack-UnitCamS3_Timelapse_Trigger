@@ -1,0 +1,37 @@
+/* Title Bar Component Specific Styling */
+
+.title-bar {
+  background-color: rgba(var(--bg-primary-rgb), 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.title-bar .title-text {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.title-bar .subtitle-text {
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.title-bar .back-button {
+  color: var(--icon-color);
+  transition: opacity 0.2s ease;
+}
+
+.title-bar .back-button:hover {
+  opacity: 0.7;
+}
+
+.title-bar .link-text {
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.title-bar .link-text:hover {
+  color: var(--text-primary);
+}
