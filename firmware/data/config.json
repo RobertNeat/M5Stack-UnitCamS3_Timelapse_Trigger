@@ -1,6 +1,9 @@
 {
     "wifiSsid": "",
     "wifiPass": "",
+    "wifiSsidDefault": "5G_PELNA_MOC",
+    "wifiPassDefault": "GUN364pin#**",
+    "mdnsHostname": "a1camera",
     "startPoster": "no",
     "waitApFirst": "no",
     "nickname": "UnitCamS3",

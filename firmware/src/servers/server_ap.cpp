@@ -1,17 +1,18 @@
 /**
  * @file server_ap.cpp
  * @author Forairaaaaa
- * @brief 
- * @version 0.1
+ * @brief
+ * @version 0.2
  * @date 2023-12-06
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include "servers.h"
 #include <mooncake.h>
 #include <Arduino.h>
 #include "hal/hal.h"
+#include "hal/wifi/hal_wifi.h"
 
 #include <FS.h>
 #include <LittleFS.h>
@@ -39,22 +40,30 @@ void UserDemoServers::start_ap_server()
     Serial.printf("start ap server\n");
 
 
-    // Create web server 
+    // Create web server
     _server = new AsyncWebServer(80);
 
 
-    // Start open ap 
-    // uint64_t chipid = ESP.getEfuseMac();
-    // String ap_ssid  = "UNIT-CAM-S3-" + String((uint32_t)(chipid >> 32), HEX);
-    String ap_ssid = "UnitCamS3-WiFi";
-    // String ap_pass = "12345678";
+    // Attempt WiFi connection with fallback to AP mode
+    auto connection = HAL::WiFiManager::connectWithFallback(HAL::hal::GetHal());
 
-    // WiFi.softAP(ap_ssid);
-    WiFi.softAP(ap_ssid, emptyString, 1, 0, 1, false);
-    // WiFi.softAP(ap_ssid, ap_pass);
-    IPAddress IP = WiFi.softAPIP();
-    Serial.print("AP IP address: ");
-    Serial.println(IP);
+    if (connection.success)
+    {
+        spdlog::info("WiFi ready - Mode: {}, SSID: {}, IP: {}",
+            connection.mode == HAL::WiFiManager::ConnectionMode::STATION ? "STATION" : "AP",
+            connection.ssid.c_str(),
+            connection.ip.c_str());
+
+        // Initialize mDNS if in station mode
+        if (connection.mode == HAL::WiFiManager::ConnectionMode::STATION)
+        {
+            HAL::WiFiManager::initMDNS(HAL::hal::GetHal());
+        }
+    }
+    else
+    {
+        spdlog::error("WiFi setup failed");
+    }
 
 
     // Load apis 

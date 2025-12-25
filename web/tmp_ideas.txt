@@ -10,8 +10,6 @@ On the start site should be:
 save the single image to the sd card
 
 
-
-
 # Controls
 --> turn on timelapse trigger (on/off)
 the camera will take photos on external button trigger when the state is on
@@ -31,6 +29,13 @@ camera will detect the start sequence based on the button press frequency
 
 --> exposure (auto/manual)
 set the exposure so the images wont flicker between the takes or make it automatic if the print is long 
+
+# Info
+
+--> SD card info (used space %, used space Mb, overall space Mb, additional info)
+--> Esp32 info (model, number of cores, features, runtime state, )
+--> camera sensor info
+--> network information (SSID, wifi state, signal strength)
 
 -------------------------------------
 

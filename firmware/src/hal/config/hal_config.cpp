@@ -37,6 +37,9 @@ void hal::setConfig(hal::Config_t& cfg)
     
     doc["wifiSsid"] = cfg.wifi_ssid;
     doc["wifiPass"] = cfg.wifi_password;
+    doc["wifiSsidDefault"] = cfg.wifi_ssid_default;
+    doc["wifiPassDefault"] = cfg.wifi_password_default;
+    doc["mdnsHostname"] = cfg.mdns_hostname;
     doc["startPoster"] = cfg.start_poster;
     doc["waitApFirst"] = cfg.wait_ap_first;
     doc["nickname"] = cfg.nickname;
@@ -64,9 +67,12 @@ hal::Config_t hal::getConfig()
     DynamicJsonDocument doc(1024);
     deserializeJson(doc, file);
 
-    // Copy into buffer 
+    // Copy into buffer
     _data.config.wifi_ssid = doc["wifiSsid"].as<String>();
     _data.config.wifi_password = doc["wifiPass"].as<String>();
+    _data.config.wifi_ssid_default = doc["wifiSsidDefault"].as<String>();
+    _data.config.wifi_password_default = doc["wifiPassDefault"].as<String>();
+    _data.config.mdns_hostname = doc["mdnsHostname"].as<String>();
     _data.config.start_poster = doc["startPoster"].as<String>();
     _data.config.wait_ap_first = doc["waitApFirst"].as<String>();
     _data.config.nickname = doc["nickname"].as<String>();
@@ -178,6 +184,9 @@ void hal::printConfig()
     spdlog::info("config:");
     printf("wifi ssid: %s\n", _data.config.wifi_ssid.c_str());
     printf("wifi pass: %s\n", _data.config.wifi_password.c_str());
+    printf("wifi ssid default: %s\n", _data.config.wifi_ssid_default.c_str());
+    printf("wifi pass default: %s\n", _data.config.wifi_password_default.c_str());
+    printf("mDNS hostname: %s\n", _data.config.mdns_hostname.c_str());
     printf("nickname: %s\n", _data.config.nickname.c_str());
     printf("post interval: %d\n", _data.config.post_interval);
     printf("time zone: %s\n", _data.config.time_zone.c_str());

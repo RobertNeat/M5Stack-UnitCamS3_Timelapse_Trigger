@@ -62,4 +62,24 @@
     color: var(--text-primary) !important;
     border-color: var(--border-color) !important;
   }
+
+  /* Dark mode specific styling for Input and Select - make them more visible */
+  @media (prefers-color-scheme: dark) {
+    .nextui-input,
+    .nextui-select,
+    .nextui-textarea,
+    [data-slot="input-wrapper"],
+    [data-slot="innerWrapper"] {
+      background-color: #242424 !important;
+    }
+  }
+
+  /* Theme class override for dark mode */
+  .theme-dark .nextui-input,
+  .theme-dark .nextui-select,
+  .theme-dark .nextui-textarea,
+  .theme-dark [data-slot="input-wrapper"],
+  .theme-dark [data-slot="innerWrapper"] {
+    background-color: #242424 !important;
+  }
 }

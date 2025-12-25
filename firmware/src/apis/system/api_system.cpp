@@ -139,21 +139,39 @@ void resetConfig(AsyncWebServerRequest* request)
 
 void setConfig(AsyncWebServerRequest* request, JsonVariant& json)
 {
-    HAL::hal::Config_t config;
+    // Get current config to preserve default values
+    HAL::hal::Config_t config = HAL::hal::GetHal()->getConfig();
 
-    // Copy configs 
-    config.wifi_ssid = json["wifiSsid"].as<String>();
-    config.wifi_password = json["wifiPass"].as<String>();
-    config.start_poster = json["startPoster"].as<String>();
-    config.post_interval = json["postInterval"];
-    config.nickname = json["nickname"].as<String>();
-    config.time_zone = json["timeZone"].as<String>();
+    // Update user-configurable fields
+    if (!json["wifiSsid"].isNull())
+        config.wifi_ssid = json["wifiSsid"].as<String>();
+    if (!json["wifiPass"].isNull())
+        config.wifi_password = json["wifiPass"].as<String>();
 
-    // Check nickname 
+    // Preserve default WiFi credentials (only update if explicitly provided)
+    if (!json["wifiSsidDefault"].isNull())
+        config.wifi_ssid_default = json["wifiSsidDefault"].as<String>();
+    if (!json["wifiPassDefault"].isNull())
+        config.wifi_password_default = json["wifiPassDefault"].as<String>();
+    if (!json["mdnsHostname"].isNull())
+        config.mdns_hostname = json["mdnsHostname"].as<String>();
+
+    if (!json["startPoster"].isNull())
+        config.start_poster = json["startPoster"].as<String>();
+    if (!json["postInterval"].isNull())
+        config.post_interval = json["postInterval"];
+    if (!json["nickname"].isNull())
+        config.nickname = json["nickname"].as<String>();
+    if (!json["timeZone"].isNull())
+        config.time_zone = json["timeZone"].as<String>();
+    if (!json["startShooter"].isNull())
+        config.start_shooter = json["startShooter"].as<String>();
+
+    // Check nickname
     if (config.nickname == "" || config.nickname == "null")
         config.nickname = "UnitCamS3";
 
-    // Check bad configs 
+    // Check bad configs
     if (config.start_poster == "" || config.post_interval == 0 || config.time_zone == "")
     {
         request->send(500, "application/json", "{\"msg\":\"bad config\"}");
@@ -165,7 +183,7 @@ void setConfig(AsyncWebServerRequest* request, JsonVariant& json)
         return;
     }
 
-    // Store 
+    // Store
     HAL::hal::GetHal()->setConfig(config);
     request->send(200, "application/json", "{\"msg\":\"ok\"}");
 }

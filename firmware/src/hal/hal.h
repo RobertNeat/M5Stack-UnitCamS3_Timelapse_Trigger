@@ -39,6 +39,9 @@ namespace HAL
         {
             String wifi_ssid;
             String wifi_password;
+            String wifi_ssid_default;
+            String wifi_password_default;
+            String mdns_hostname = "a1camera";
             String start_poster = "no";
             String wait_ap_first = "no";
             String nickname = "UnitCamS3";

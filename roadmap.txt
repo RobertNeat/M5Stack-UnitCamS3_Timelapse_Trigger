@@ -1,0 +1,11 @@
+1) ✅ DONE - Changed WiFi mode: Auto-connect to WiFi from config.json, fallback to AP mode for user configuration
+2) ✅ DONE - Added WiFi configuration UI with scan functionality
+3) Test WiFi connection on actual hardware
+4) Verify mDNS hostname resolution works
+5) Test AP mode fallback behavior
+6) Validate web interface WiFi configuration workflow end-to-end
+7) Test config persistence across reboots
+8) Add captive portal for AP mode (optional enhancement)
+9) Implement WiFi reconnection if connection drops during operation
+10) Add WiFi signal strength indicator to web UI (optional)
+11) Test with multiple devices on same network

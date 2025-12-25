@@ -12,6 +12,7 @@ import {
   ModalBody,
   ModalFooter,
   Code,
+  Input,
 } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { useDisclosure } from "@nextui-org/react";
@@ -144,9 +145,101 @@ export default function CardShooterConfig() {
       });
   }
 
+  function handleScanWiFi() {
+    console.log("scan wifi");
+
+    setWidgetStates({
+      ...widgetStates,
+      wifiScanButtonLabel: "Scanning",
+    });
+
+    fetch("/api/v1/get_wifi_list")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const wifiList: ItemWifiSsid[] = [];
+        for (let i = 0; i < data.wifiList.length; i++) {
+          if (data.wifiList[i] === "") continue;
+          wifiList.push({
+            key: data.wifiList[i],
+            label: data.wifiList[i],
+          });
+        }
+        setWidgetStates({
+          ...widgetStates,
+          wifiScanButtonLabel: "Scan WiFi",
+          wifiSsidList: wifiList,
+        });
+      })
+      .catch((error) => {
+        console.error("WiFi scan error:", error);
+        setWidgetStates({
+          ...widgetStates,
+          wifiScanButtonLabel: "Scan WiFi",
+        });
+      });
+  }
+
   return (
     <Card className="grow">
-      {/* poster configs */}
+      {/* WiFi Configuration */}
+      <div className="mx-5 mt-5 mb-5 flex flex-col gap-x-5 gap-y-5">
+        <p className="grow mr-5 text-3xl font-serif font-bold">WiFi Setup</p>
+
+        <div className="flex gap-x-3">
+          <Select
+            label="WiFi SSID"
+            placeholder="Select or type WiFi network"
+            className="grow"
+            color="primary"
+            selectedKeys={userConfig.wifiSsid ? [userConfig.wifiSsid] : []}
+            onChange={(e) => {
+              setUserConfig({ ...userConfig, wifiSsid: e.target.value });
+            }}
+          >
+            {widgetStates.wifiSsidList.map((wifi) => (
+              <SelectItem key={wifi.key} value={wifi.key}>
+                {wifi.label}
+              </SelectItem>
+            ))}
+          </Select>
+          <Button
+            radius="full"
+            variant="flat"
+            color="primary"
+            onPress={handleScanWiFi}
+            isLoading={widgetStates.wifiScanButtonLabel === "Scanning"}
+          >
+            {widgetStates.wifiScanButtonLabel}
+          </Button>
+        </div>
+
+        <Input
+          type="text"
+          label="WiFi SSID (or type manually)"
+          placeholder="Enter WiFi network name"
+          value={userConfig.wifiSsid}
+          onValueChange={(value) => {
+            setUserConfig({ ...userConfig, wifiSsid: value });
+          }}
+          color="primary"
+        />
+
+        <Input
+          type="password"
+          label="WiFi Password"
+          placeholder="Enter WiFi password"
+          value={userConfig.wifiPass}
+          onValueChange={(value) => {
+            setUserConfig({ ...userConfig, wifiPass: value });
+          }}
+          color="primary"
+        />
+      </div>
+
+      <Divider></Divider>
+
+      {/* Interval configs */}
       <div className="mx-5 mt-5 mb-5 flex flex-col gap-x-5 gap-y-5">
         <p className="grow mr-5 text-3xl font-serif font-bold">Interval</p>
         <Select
@@ -197,6 +290,16 @@ export default function CardShooterConfig() {
                 </ModalHeader>
                 <ModalBody>
                   <p>Start interval shooting with following config:</p>
+
+                  <p>
+                    <Code color="primary">WiFi SSID</Code>{" "}
+                    {userConfig.wifiSsid || "(not set)"}
+                  </p>
+
+                  <p>
+                    <Code color="primary">WiFi Password</Code>{" "}
+                    {userConfig.wifiPass ? "********" : "(not set)"}
+                  </p>
 
                   <p>
                     <Code color="success">Post interval</Code>{" "}
